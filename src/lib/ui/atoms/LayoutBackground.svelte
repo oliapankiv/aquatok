@@ -1,4 +1,4 @@
-<div class="fixed inset-0 -z-50 bg-[#0f1115]">
+<div class="fixed inset-0 -z-50 bg-secondary">
   <!-- main gradient orbs -->
   <div class="animate-float absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-[#ff9e67] blur-3xl"></div>
   <div
