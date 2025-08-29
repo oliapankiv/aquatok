@@ -6,9 +6,10 @@
   import faviconsvg from '$lib/assets/favicon/favicon.svg'
   import faviconpng from '$lib/assets/favicon/favicon.png'
 
+  import Header from '$lib/ui/molecules/Header.svelte'
   import LayoutBackground from '$lib/ui/atoms/LayoutBackground.svelte'
 
-  let { children } = $props()
+  const { children } = $props()
 </script>
 
 <svelte:head>
@@ -18,5 +19,7 @@
 </svelte:head>
 
 <LayoutBackground />
+
+<Header />
 
 {@render children?.()}

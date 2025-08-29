@@ -1,6 +1,7 @@
 {
   "generic": {
-    "hi": "привіт"
+    "hi": "привіт",
+    "contact": "контакт"
   },
   "title": {
     "default": "Aquatok",
