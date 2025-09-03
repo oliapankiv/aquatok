@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { HTMLButtonAttributes } from 'svelte/elements'
 
-  const { children, class: className = '', ...props }: HTMLButtonAttributes = $props()
+  const { children, class: className, ...props }: HTMLButtonAttributes = $props()
 </script>
 
 <button
   type="button"
-  class="flex size-12 items-center justify-center self-center rounded-lg hover:bg-white/5 lg:hidden {className}"
+  class={['flex size-12 items-center justify-center self-center rounded-lg hover:bg-white/5 lg:hidden', className]}
   {...props}
 >
   {@render children?.()}
