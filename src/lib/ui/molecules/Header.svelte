@@ -1,6 +1,8 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
 
+  import type { HTMLAttributes } from 'svelte/elements'
+
   import { scroll } from '$lib/composables/scroll'
 
   import Button from '$lib/ui/atoms/Button.svelte'
@@ -9,7 +11,7 @@
   import Logo from '$lib/ui/icons/Logo.svelte'
   import Burger from '$lib/ui/icons/Burger.svelte'
 
-  const { class: className = '', ...restProps } = $props()
+  const { class: className, ...props }: HTMLAttributes<HTMLElement> = $props()
 
   let toggled = $state(false)
 
@@ -33,7 +35,7 @@
   </a>
 {/snippet}
 
-<header class="text-pri fixed z-50 w-full transition-colors duration-300 {className} {headerBlur}" {...restProps}>
+<header class={['text-pri fixed z-50 w-full transition-colors duration-300', headerBlur, className]} {...props}>
   <nav
     class="relative container mx-auto flex items-center justify-between px-4 transition-[padding] sm:px-6 {scrolled
       ? 'py-4'
