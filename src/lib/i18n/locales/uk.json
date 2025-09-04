@@ -1,7 +1,9 @@
 {
+  "brand": "Aquatok",
   "generic": {
     "hi": "привіт",
-    "contact": "контакт"
+    "contact": "контакт",
+    "offerings": "послуги"
   },
   "title": {
     "default": "Aquatok",
