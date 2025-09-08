@@ -52,7 +52,10 @@
   </Spaced>
 {/snippet}
 
-<header class={['sticky top-0 z-40 m-auto max-w-7xl px-6 text-base', { 'backdrop-blur-md': scrolled }, className]} {...props}>
+<header
+  class={['sticky top-0 z-40 mx-auto max-w-7xl px-6 text-base lg:px-8', { 'backdrop-blur-md': scrolled }, className]}
+  {...props}
+>
   <div
     class={[
       'fixed inset-0 h-screen w-full origin-top scale-y-0 bg-neutral-950/80 backdrop-blur-2xl transition-[scale] duration-400',
