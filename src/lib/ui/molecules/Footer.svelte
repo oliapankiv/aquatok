@@ -94,9 +94,9 @@
               <Logo class="h-10 w-auto text-primary lg:h-12" />
             </Spaced>
 
-            <div class="mt-2 flex h-5 justify-around gap-2 text-white">
+            <div class="flex h-9 justify-around gap-2 text-white">
               {#each socialLinks as link}
-                <a class="hover:text-white/75" target="_blank" rel="noopener noreferrer" href={link.href}>
+                <a class="p-2 hover:text-white/75" target="_blank" rel="noopener noreferrer" href={link.href}>
                   <link.logo class="h-full w-auto" />
                 </a>
               {/each}
