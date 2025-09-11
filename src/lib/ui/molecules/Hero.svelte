@@ -9,7 +9,7 @@
 </script>
 
 <section class={['relative -mt-21.5 pt-33.5 sm:-mt-26.5 md:pt-52', className]} {...props}>
-  <div class="absolute inset-0 bg-gray-900/25"></div>
+  <div class="absolute inset-0 bg-gray-900/20"></div>
 
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="flex flex-col items-center gap-8 sm:flex-row sm:gap-10 md:gap-12 lg:gap-20">
