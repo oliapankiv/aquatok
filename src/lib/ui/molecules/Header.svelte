@@ -2,6 +2,8 @@
   import { _ } from 'svelte-i18n'
   import { fade } from 'svelte/transition'
 
+  import { resolve } from '$app/paths'
+
   import type { RouteId } from '$app/types'
   import type { HTMLAttributes } from 'svelte/elements'
 
@@ -35,7 +37,7 @@
 </script>
 
 {#snippet logo(href: RouteId = '/')}
-  <a {href} class="inline-flex h-full w-40 items-center justify-center text-primary">
+  <a href={resolve(href)} class="inline-flex h-full w-40 items-center justify-center text-primary">
     <Logo class="h-10 w-auto" />
   </a>
 {/snippet}
@@ -43,7 +45,7 @@
 {#snippet link({ href, label }: Link, axis: Axis)}
   <Spaced {axis}>
     <a
-      {href}
+      href={resolve(href)}
       onclick={() => (toggled = false)}
       class="inline-flex h-full w-full items-center px-4 py-3 capitalize bg-blend-multiply hover:bg-white/[2.5%]"
     >

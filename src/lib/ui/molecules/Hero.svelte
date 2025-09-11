@@ -1,6 +1,8 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
 
+  import { resolve } from '$app/paths'
+
   import type { HTMLAttributes } from 'svelte/elements'
 
   import man from '$lib/assets/images/hero-man.png'
@@ -26,7 +28,7 @@
           </p>
 
           <a
-            href="/"
+            href={resolve('/')}
             class="mx-auto inline-flex cursor-pointer rounded-lg bg-primary px-6 py-3 font-medium text-gray-900 saturate-[1.4] transition-all duration-300 hover:shadow-md hover:shadow-primary/20 hover:saturate-[1.6] md:mt-6"
           >
             {$_('section.hero.action')}

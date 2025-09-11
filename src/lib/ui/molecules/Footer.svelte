@@ -1,6 +1,8 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
 
+  import { resolve } from '$app/paths'
+
   import type { Component } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import type { RouteId } from '$app/types'
@@ -52,7 +54,7 @@
     <ul class="mt-4 -ml-1.5 text-white capitalize">
       {#each links as { href, label }}
         <li>
-          <a {href} class="inline-flex p-1.5 hover:text-white/75">
+          <a href={resolve(href)} class="inline-flex p-1.5 hover:text-white/75">
             {label}
           </a>
         </li>
@@ -79,7 +81,7 @@
       </p>
 
       <a
-        href="/"
+        href={resolve('/')}
         class="mx-auto mt-6 inline-flex cursor-pointer rounded-lg bg-primary px-6 py-3 font-medium text-gray-900 saturate-[1.4] transition-all duration-300 hover:shadow-md hover:shadow-primary/20 hover:saturate-[1.6]"
       >
         {$_('section.footer.banner.action')}
@@ -96,7 +98,7 @@
 
             <div class="flex h-9 justify-around gap-2 text-white">
               {#each socialLinks as link}
-                <a class="p-2 hover:text-white/75" target="_blank" rel="noopener noreferrer" href={link.href}>
+                <a class="p-2 hover:text-white/75" target="_blank" rel="noopener noreferrer" href={resolve(link.href)}>
                   <link.logo class="h-full w-auto" />
                 </a>
               {/each}
