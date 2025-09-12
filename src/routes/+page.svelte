@@ -2,11 +2,11 @@
   import { _ } from 'svelte-i18n'
 
   import Hero from '$lib/ui/molecules/Hero.svelte'
-  import Services from '$lib/ui/molecules/Services.svelte'
+  import Contact from '$lib/ui/molecules/Contact.svelte'
 </script>
 
 <Hero />
 
-<Services />
+<Contact />
 
 <h1>{$_('')}</h1>

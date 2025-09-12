@@ -62,7 +62,7 @@
     ]}
   ></div>
 
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+  <div class="container">
     <Lined class="flex justify-between">
       <div>
         <Spaced class="h-full">

@@ -64,7 +64,7 @@
 {/snippet}
 
 <footer class={['relative border border-gray-800/50 bg-gray-900/50 text-white backdrop-blur-xl', className]} {...props}>
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+  <div class="container">
     <div class="pt-20 pb-16 text-center sm:py-24">
       <hgroup>
         <p class="text-lg font-medium text-primary sm:text-2xl">
