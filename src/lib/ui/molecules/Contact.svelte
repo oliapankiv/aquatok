@@ -13,6 +13,7 @@
   type Contact = {
     number: string
     icon: Component
+    protocol: string
   }
 
   type Card = {
@@ -30,8 +31,8 @@
       title: $_('section.contact.card.0.title'),
       description: $_('section.contact.card.0.description'),
       contacts: [
-        { number: '095 005 99 39', icon: Viber },
-        { number: '068 624 86 89', icon: Phone },
+        { number: '095 005 99 39', icon: Viber, protocol: 'viber://chat?number=%2B' },
+        { number: '068 624 86 89', icon: Phone, protocol: 'tel:+' },
       ],
     },
     {
@@ -40,8 +41,8 @@
       title: $_('section.contact.card.1.title'),
       description: $_('section.contact.card.1.description'),
       contacts: [
-        { number: '095 006 03 36', icon: Viber },
-        { number: '068 337 70 44', icon: Phone },
+        { number: '095 006 03 36', icon: Viber, protocol: 'viber://chat?number=%2B' },
+        { number: '068 337 70 44', icon: Phone, protocol: 'tel:+' },
       ],
     },
   ]
@@ -62,7 +63,7 @@
     <div class="mt-auto mb-2 flex w-full justify-around">
       {#each props.contacts as contact}
         <a
-          href={`tel:+38${contact.number.replaceAll(' ', '')}`}
+          href={`${contact.protocol}38${contact.number.replaceAll(' ', '')}`}
           class="inline-flex items-center gap-2 underline-offset-4 hover:underline-offset-2"
         >
           <contact.icon class="h-5 w-auto sm:h-7" />

@@ -7,6 +7,8 @@
   import type { HTMLAttributes } from 'svelte/elements'
   import type { RouteId } from '$app/types'
 
+  import { SocialLink } from '$lib/constants'
+
   import Logo from '$lib/ui/icons/Logo.svelte'
   import Facebook from '$lib/ui/icons/Facebook.svelte'
   import Telegram from '$lib/ui/icons/Telegram.svelte'
@@ -16,7 +18,7 @@
   import Spaced from '$lib/ui/atoms/Spaced.svelte'
 
   type Link = {
-    href: RouteId
+    href: RouteId | SocialLink
     label: string
     logo?: Component
   }
@@ -32,9 +34,9 @@
   ]
 
   const socialLinks: Link[] = [
-    { href: '/', label: 'Telegram', logo: Telegram },
-    { href: '/', label: 'Instagram', logo: Instagram },
-    { href: '/', label: 'Facebook', logo: Facebook },
+    { href: SocialLink.TELEGRAM, label: 'Telegram', logo: Telegram },
+    { href: SocialLink.INSTAGRAM, label: 'Instagram', logo: Instagram },
+    { href: SocialLink.FACEBOOK, label: 'Facebook', logo: Facebook },
   ]
 
   const sections: Section[] = [
@@ -54,7 +56,7 @@
     <ul class="mt-4 -ml-1.5 text-white capitalize">
       {#each links as { href, label }}
         <li>
-          <a href={resolve(href)} class="inline-flex p-1.5 hover:text-white/75">
+          <a href={href === '/' ? resolve(href) : href} class="inline-flex p-1.5 hover:text-white/75">
             {label}
           </a>
         </li>
@@ -98,7 +100,7 @@
 
             <div class="flex h-9 justify-around gap-2 text-white">
               {#each socialLinks as link}
-                <a class="p-2 hover:text-white/75" target="_blank" rel="noopener noreferrer" href={resolve(link.href)}>
+                <a class="p-2 hover:text-white/75" target="_blank" rel="noopener noreferrer" href={link.href}>
                   <link.logo class="h-full w-auto" />
                 </a>
               {/each}
