@@ -31,7 +31,7 @@ jobs:
 
       - name: Build 🏗️
         env:
-          PUBLIC_BASE_URL: ${{ steps.deployment.outputs.page_url }}
+          PUBLIC_BASE_URL: ${{ vars.BASE_URL }}
         run: |
           pnpm build
 
