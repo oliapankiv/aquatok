@@ -36,7 +36,7 @@
 </script>
 
 {#snippet logo(href: RouteId = '/')}
-  <a {href} class="inline-flex h-full w-40 items-center justify-center text-primary">
+  <a {href} class="inline-flex h-full w-40 items-center justify-center text-primary" aria-label={$_('brand')}>
     <Logo class="h-10 w-auto" />
   </a>
 {/snippet}
