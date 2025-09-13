@@ -1,13 +1,12 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
 
-  import { resolve } from '$app/paths'
-
   import type { Component } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import type { RouteId } from '$app/types'
+  import type { HTMLAnchorAttributes, HTMLAttributes } from 'svelte/elements'
 
+  import { Section } from '$lib/enums'
   import { SocialLink } from '$lib/constants'
+  import { isInEnum, scrollIntoView } from '$lib/helpers'
 
   import Logo from '$lib/ui/icons/Logo.svelte'
   import Facebook from '$lib/ui/icons/Facebook.svelte'
@@ -18,19 +17,19 @@
   import Spaced from '$lib/ui/atoms/Spaced.svelte'
 
   type Link = {
-    href: RouteId | SocialLink
+    href: Section | SocialLink
     label: string
     logo?: Component
   }
 
-  type Section = {
+  type Column = {
     name: string
     links: Link[]
   }
 
   const siteLinks: Link[] = [
-    { href: '/', label: $_('generic.offerings') },
-    { href: '/', label: $_('generic.contact') },
+    { href: Section.OFFERINGS, label: $_('generic.offerings') },
+    { href: Section.CONTACT, label: $_('generic.contact') },
   ]
 
   const socialLinks: Link[] = [
@@ -39,7 +38,7 @@
     { href: SocialLink.FACEBOOK, label: 'Facebook', logo: Facebook },
   ]
 
-  const sections: Section[] = [
+  const columns: Column[] = [
     { name: $_('section.footer.sections.sitemap'), links: siteLinks },
     { name: $_('section.footer.sections.social'), links: socialLinks },
   ]
@@ -47,16 +46,25 @@
   const copyright = `© ${new Date().getFullYear()} ${$_('brand')}`
 
   const { class: className, ...props }: HTMLAttributes<HTMLElement> = $props()
+
+  const applyLink = (url: Link['href']) => {
+    const isLink = isInEnum(url, SocialLink)
+
+    return {
+      href: isLink ? url : `#${url}`,
+      ...(isLink ? { target: '_blank', rel: 'noopener noreferrer' } : { onclick: scrollIntoView(url) }),
+    } satisfies Partial<HTMLAnchorAttributes>
+  }
 </script>
 
-{#snippet section({ name, links }: Section)}
+{#snippet section({ name, links }: Column)}
   <div class="text-sm/6 font-medium">
     <h3 class="text-white/50">{name}</h3>
 
     <ul class="mt-4 -ml-1.5 text-white capitalize">
       {#each links as { href, label }}
         <li>
-          <a href={href === '/' ? resolve(href) : href} class="inline-flex p-1.5 hover:text-white/75">
+          <a {...applyLink(href)} class="inline-flex p-1.5 hover:text-white/75">
             {label}
           </a>
         </li>
@@ -83,7 +91,7 @@
       </p>
 
       <a
-        href={resolve('/')}
+        {...applyLink(Section.CONTACT)}
         class="mx-auto mt-6 inline-flex cursor-pointer rounded-lg bg-primary px-6 py-3 font-medium text-gray-900 saturate-[1.4] transition-all duration-300 hover:shadow-md hover:shadow-primary/20 hover:saturate-[1.6]"
       >
         {$_('section.footer.banner.action')}
@@ -100,7 +108,7 @@
 
             <div class="flex h-9 justify-around gap-2 text-white">
               {#each socialLinks as link}
-                <a class="p-2 hover:text-white/75" target="_blank" rel="noopener noreferrer" href={link.href}>
+                <a {...applyLink(link.href)} class="p-2 hover:text-white/75">
                   <link.logo class="h-full w-auto" />
                 </a>
               {/each}
@@ -108,7 +116,7 @@
           </div>
 
           <div class="flex gap-x-20 sm:pt-6">
-            {#each sections as item}
+            {#each columns as item}
               {@render section(item)}
             {/each}
           </div>

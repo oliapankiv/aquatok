@@ -4,6 +4,8 @@
   import type { Component } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
 
+  import { Section } from '$lib/enums'
+
   import Bulb from '$lib/ui/icons/Bulb.svelte'
   import Phone from '$lib/ui/icons/Phone.svelte'
   import Viber from '$lib/ui/icons/Viber.svelte'
@@ -77,8 +79,8 @@
   </div>
 {/snippet}
 
-<section class={['w-full text-white', className]} {...props}>
-  <div class="bg-gray-900/95 pt-20 pb-45">
+<section id={Section.CONTACT} class={['w-full text-white', className]} {...props}>
+  <div id={Section.OFFERINGS} class="bg-gray-900/95 pt-20 pb-45">
     <div class="container">
       <div class="flex flex-col items-center justify-between lg:flex-row">
         <div class="max-w-100 text-center lg:text-left">

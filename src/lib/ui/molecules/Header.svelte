@@ -9,7 +9,8 @@
 
   import { scroll } from '$lib/composables/scroll'
 
-  import { Axis } from '$lib/enums'
+  import { Axis, Section } from '$lib/enums'
+  import { scrollIntoView } from '$lib/helpers'
 
   import Lined from '$lib/ui/atoms/Lined.svelte'
   import Button from '$lib/ui/atoms/Button.svelte'
@@ -20,13 +21,13 @@
   import Burger from '$lib/ui/icons/Burger.svelte'
 
   type Link = {
-    href: RouteId
     label: string
+    section: Section
   }
 
   const links: Link[] = [
-    { href: '/', label: $_('generic.offerings') },
-    { href: '/', label: $_('generic.contact') },
+    { section: Section.OFFERINGS, label: $_('generic.offerings') },
+    { section: Section.CONTACT, label: $_('generic.contact') },
   ]
 
   const { class: className, ...props }: HTMLAttributes<HTMLElement> = $props()
@@ -42,11 +43,11 @@
   </a>
 {/snippet}
 
-{#snippet link({ href, label }: Link, axis: Axis)}
+{#snippet link({ section, label }: Link, axis: Axis)}
   <Spaced {axis}>
     <a
-      href={resolve(href)}
-      onclick={() => (toggled = false)}
+      href={`#${section}`}
+      onclick={(event) => (toggled = false) || scrollIntoView(section)(event)}
       class="inline-flex h-full w-full items-center px-4 py-3 capitalize bg-blend-multiply hover:bg-white/[2.5%]"
     >
       {label}
