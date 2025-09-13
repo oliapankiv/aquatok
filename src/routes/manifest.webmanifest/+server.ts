@@ -1,13 +1,11 @@
 import type { RequestHandler } from '@sveltejs/kit'
 
-import { resolve } from '$app/paths'
-
 import faviconsvg from '$lib/assets/favicon/favicon.svg'
 
 export const prerender = true
 
 const manifest = JSON.stringify({
-  start_url: resolve('/'),
+  start_url: '/',
   name: 'Aquatok',
   short_name: 'Aquatok',
   display: 'standalone',
