@@ -28,6 +28,8 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content={$_('meta.imagealt')} />
+
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${env.PUBLIC_GTAG_ID}`}></script>
 </svelte:head>
 
 <LayoutBackground />
