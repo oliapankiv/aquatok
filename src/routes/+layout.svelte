@@ -1,6 +1,8 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
 
+  import { env } from '$env/dynamic/public'
+
   import '../app.css'
 
   import faviconsvg from '$lib/assets/favicon/favicon.svg'
@@ -21,6 +23,11 @@
   <meta name="description" property="og:description" content={$_('meta.description')} />
   <meta name="keywords" content={$_('meta.keywords')} />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content={`${env.PUBLIC_BASE_URL}/opengraph.png`} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content={$_('meta.imagealt')} />
 </svelte:head>
 
 <LayoutBackground />

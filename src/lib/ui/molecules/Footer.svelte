@@ -59,7 +59,7 @@
 
 {#snippet section({ name, links }: Column)}
   <div class="text-sm/6 font-medium">
-    <h3 class="text-white/50">{name}</h3>
+    <h4 class="text-white/50">{name}</h4>
 
     <ul class="mt-4 -ml-1.5 text-white capitalize">
       {#each links as { href, label }}
@@ -108,7 +108,7 @@
 
             <div class="flex h-9 justify-around gap-2 text-white">
               {#each socialLinks as link}
-                <a {...applyLink(link.href)} class="p-2 hover:text-white/75">
+                <a {...applyLink(link.href)} class="p-2 hover:text-white/75" aria-label={link.label}>
                   <link.logo class="h-full w-auto" />
                 </a>
               {/each}
@@ -126,7 +126,7 @@
       <Lined class="flex justify-center">
         <div>
           <Spaced class="px-2 py-3">
-            <div class="text-sm/6 text-primary/70">{copyright}</div>
+            <div class="text-sm/6 text-primary">{copyright}</div>
           </Spaced>
         </div>
       </Lined>

@@ -84,9 +84,9 @@
     <div class="container">
       <div class="flex flex-col items-center justify-between lg:flex-row">
         <div class="max-w-100 text-center lg:text-left">
-          <h3 class="mb-4 text-4xl font-bold">
+          <h2 class="mb-4 text-4xl font-bold">
             {$_('section.contact.title')}<span class="text-primary">{'.'}</span>
-          </h3>
+          </h2>
 
           <p class="text-gray-300">{$_('section.contact.description')}</p>
         </div>
