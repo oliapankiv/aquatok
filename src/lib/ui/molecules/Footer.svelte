@@ -59,7 +59,7 @@
 
 {#snippet section({ name, links }: Column)}
   <div class="text-sm/6 font-medium">
-    <h4 class="text-white/50">{name}</h4>
+    <h5 class="text-white/50">{name}</h5>
 
     <ul class="mt-4 -ml-1.5 text-white capitalize">
       {#each links as { href, label }}
