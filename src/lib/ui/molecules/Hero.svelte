@@ -11,7 +11,13 @@
   const { class: className, ...props }: HTMLAttributes<HTMLElement> = $props()
 </script>
 
-<section class={['relative -mt-21.5 pt-33.5 sm:-mt-26.5 md:pt-52', className]} {...props}>
+<section
+  class={[
+    'relative -mt-21.5 pt-33.5 before:absolute before:inset-x-0 before:-bottom-px before:h-px before:scale-y-110 before:bg-linear-to-r before:from-transparent before:via-white/80 before:to-transparent sm:-mt-26.5 md:pt-52',
+    className,
+  ]}
+  {...props}
+>
   <div class="absolute inset-0 bg-gray-900/20"></div>
 
   <div class="container">

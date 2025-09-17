@@ -10,6 +10,7 @@
 
   import Header from '$lib/ui/molecules/Header.svelte'
   import LayoutBackground from '$lib/ui/atoms/LayoutBackground.svelte'
+  import Faq from '$lib/ui/molecules/Faq.svelte'
   import Footer from '$lib/ui/molecules/Footer.svelte'
 
   const { children } = $props()
@@ -37,5 +38,7 @@
 <Header />
 
 {@render children?.()}
+
+<Faq />
 
 <Footer />
