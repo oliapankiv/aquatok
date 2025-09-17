@@ -80,7 +80,7 @@
 {/snippet}
 
 <section id={Section.CONTACT} class={['w-full text-white', className]} {...props}>
-  <div id={Section.OFFERINGS} class="bg-gray-900/95 pt-20 pb-45">
+  <div class="bg-gray-900/95 pt-20 pb-45">
     <div class="container">
       <div class="flex flex-col items-center justify-between lg:flex-row">
         <div class="max-w-100 text-center lg:text-left">
