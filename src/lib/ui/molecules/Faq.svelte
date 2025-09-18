@@ -8,7 +8,7 @@
   const { class: className, ...props }: HTMLAttributes<HTMLElement> = $props()
 </script>
 
-<section class={['py-15 text-white', className]} {...props}>
+<section class={['py-20 text-white', className]} {...props}>
   <div class="container max-w-5xl">
     <h4 class="mb-10 text-center text-4xl font-bold">
       {$_('section.faq.titleStart')}
