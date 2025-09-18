@@ -79,7 +79,7 @@
   </div>
 {/snippet}
 
-<section id={Section.CONTACT} class={['w-full text-white', className]} {...props}>
+<section class={['text-white', className]} {...props}>
   <div class="bg-gray-900/95 pt-20 pb-45">
     <div class="container">
       <div class="flex flex-col items-center justify-between lg:flex-row">
@@ -99,7 +99,7 @@
   <div class="relative">
     <div class="absolute inset-0 bg-gray-900/50 backdrop-blur-xl"></div>
 
-    <div class="container grid -translate-y-30 gap-4 sm:gap-8 md:grid-cols-2">
+    <div id={Section.CONTACT} class="container -mt-20 grid -translate-y-30 gap-4 pt-20 sm:gap-8 md:grid-cols-2">
       {#each cards as item}
         {@render card(item)}
       {/each}
