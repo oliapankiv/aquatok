@@ -10,6 +10,7 @@
 
   import Header from '$lib/ui/molecules/Header.svelte'
   import LayoutBackground from '$lib/ui/atoms/LayoutBackground.svelte'
+  import Testimonials from '$lib/ui/molecules/Testimonials.svelte'
   import Faq from '$lib/ui/molecules/Faq.svelte'
   import Footer from '$lib/ui/molecules/Footer.svelte'
 
@@ -38,6 +39,8 @@
 <Header />
 
 {@render children?.()}
+
+<Testimonials />
 
 <Faq />
 
