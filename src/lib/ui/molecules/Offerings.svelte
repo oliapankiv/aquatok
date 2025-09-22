@@ -59,7 +59,7 @@
   </div>
 {/snippet}
 
-<section id={Section.OFFERINGS} class={['bg-gray-900/95 pt-14 pb-12 md:pt-24', className]} {...props}>
+<section id={Section.OFFERINGS} class={['bg-gray-900/95 pt-16 pb-12 md:pt-24', className]} {...props}>
   <div class="container grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:gap-8">
     {#each cards as item}
       {@render card(item)}

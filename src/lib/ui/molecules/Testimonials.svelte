@@ -69,7 +69,9 @@
       <Lined class="flex justify-center">
         <div>
           <Spaced>
-            <span class="mx-auto inline-block p-8 pb-3 text-4xl font-bold">{$_('section.testimonials.title')}</span>
+            <span class="mx-auto inline-block p-4 pb-3 text-center text-4xl font-bold sm:p-8"
+              >{$_('section.testimonials.title')}</span
+            >
           </Spaced>
         </div>
       </Lined>
