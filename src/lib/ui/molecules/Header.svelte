@@ -24,6 +24,7 @@
   }
 
   const links: Link[] = [
+    { href: '/vacancies', label: $_('generic.vacancies') },
     { href: Section.OFFERINGS, label: $_('generic.offerings') },
     { href: Section.CONTACT, label: $_('generic.contact') },
   ]
@@ -38,7 +39,7 @@
     const isAnchor = isInEnum(url, Section)
 
     return {
-      href: isAnchor ? `#${url}` : url,
+      href: isAnchor ? `/#${url}` : url,
       ...(isAnchor && { onclick: (event) => (toggled = false) || scrollIntoView(url)(event) }),
     } satisfies Partial<HTMLAnchorAttributes>
   }
