@@ -4,7 +4,9 @@ export const isInEnum = <T extends { [K in keyof T]: T[K] }>(value: unknown, obj
   Object.values(object).includes(value)
 
 export const scrollIntoView = (section: Section) => (event: MouseEvent) => {
-  event.preventDefault()
+  const target = document.getElementById(section)
 
-  document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' })
+  target && event.preventDefault()
+
+  target?.scrollIntoView({ behavior: 'smooth' })
 }

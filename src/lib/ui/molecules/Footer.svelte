@@ -29,6 +29,7 @@
   }
 
   const siteLinks: Link[] = [
+    { href: '/vacancies', label: $_('generic.vacancies') },
     { href: Section.OFFERINGS, label: $_('generic.offerings') },
     { href: Section.CONTACT, label: $_('generic.contact') },
   ]
@@ -53,7 +54,7 @@
     const isExternal = !isAnchor && isInEnum(url, SocialLink)
 
     return {
-      href: isAnchor ? `#${url}` : url,
+      href: isAnchor ? `/#${url}` : url,
       ...(isAnchor ? { onclick: scrollIntoView(url) } : isExternal && { target: '_blank', rel: 'noopener noreferrer' }),
     } satisfies Partial<HTMLAnchorAttributes>
   }
