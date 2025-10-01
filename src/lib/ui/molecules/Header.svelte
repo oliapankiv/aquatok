@@ -3,12 +3,12 @@
   import { fade } from 'svelte/transition'
 
   import type { RouteId } from '$app/types'
-  import type { HTMLAttributes } from 'svelte/elements'
+  import type { HTMLAnchorAttributes, HTMLAttributes } from 'svelte/elements'
 
   import { scroll } from '$lib/composables/scroll'
 
   import { Axis, Section } from '$lib/enums'
-  import { scrollIntoView } from '$lib/helpers'
+  import { isInEnum, scrollIntoView } from '$lib/helpers'
 
   import Lined from '$lib/ui/atoms/Lined.svelte'
   import Button from '$lib/ui/atoms/Button.svelte'
@@ -20,12 +20,12 @@
 
   type Link = {
     label: string
-    section: Section
+    href: Section | RouteId
   }
 
   const links: Link[] = [
-    { section: Section.OFFERINGS, label: $_('generic.offerings') },
-    { section: Section.CONTACT, label: $_('generic.contact') },
+    { href: Section.OFFERINGS, label: $_('generic.offerings') },
+    { href: Section.CONTACT, label: $_('generic.contact') },
   ]
 
   const { class: className, ...props }: HTMLAttributes<HTMLElement> = $props()
@@ -33,6 +33,15 @@
   let toggled = $state<boolean>(false)
 
   const scrolled = $derived<boolean>($scroll > 0.01)
+
+  const applyLink = (url: Link['href']) => {
+    const isAnchor = isInEnum(url, Section)
+
+    return {
+      href: isAnchor ? `#${url}` : url,
+      ...(isAnchor && { onclick: (event) => (toggled = false) || scrollIntoView(url)(event) }),
+    } satisfies Partial<HTMLAnchorAttributes>
+  }
 </script>
 
 {#snippet logo(href: RouteId = '/')}
@@ -41,11 +50,10 @@
   </a>
 {/snippet}
 
-{#snippet link({ section, label }: Link, axis: Axis)}
+{#snippet link({ href, label }: Link, axis: Axis)}
   <Spaced {axis}>
     <a
-      href={`#${section}`}
-      onclick={(event) => (toggled = false) || scrollIntoView(section)(event)}
+      {...applyLink(href)}
       class="inline-flex h-full w-full items-center px-4 py-3 capitalize bg-blend-multiply hover:bg-white/[2.5%]"
     >
       {label}
