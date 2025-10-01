@@ -2,6 +2,7 @@
   import { _ } from 'svelte-i18n'
 
   import type { Component } from 'svelte'
+  import type { RouteId } from '$app/types'
   import type { HTMLAnchorAttributes, HTMLAttributes } from 'svelte/elements'
 
   import { Section } from '$lib/enums'
@@ -17,7 +18,7 @@
   import Spaced from '$lib/ui/atoms/Spaced.svelte'
 
   type Link = {
-    href: Section | SocialLink
+    href: Section | SocialLink | RouteId
     label: string
     logo?: Component
   }
@@ -48,11 +49,12 @@
   const { class: className, ...props }: HTMLAttributes<HTMLElement> = $props()
 
   const applyLink = (url: Link['href']) => {
-    const isLink = isInEnum(url, SocialLink)
+    const isAnchor = isInEnum(url, Section)
+    const isExternal = !isAnchor && isInEnum(url, SocialLink)
 
     return {
-      href: isLink ? url : `#${url}`,
-      ...(isLink ? { target: '_blank', rel: 'noopener noreferrer' } : { onclick: scrollIntoView(url) }),
+      href: isAnchor ? `#${url}` : url,
+      ...(isAnchor ? { onclick: scrollIntoView(url) } : isExternal && { target: '_blank', rel: 'noopener noreferrer' }),
     } satisfies Partial<HTMLAnchorAttributes>
   }
 </script>
