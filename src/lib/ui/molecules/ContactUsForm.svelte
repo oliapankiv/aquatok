@@ -7,6 +7,7 @@
 
   import Action from '$lib/ui/atoms/Action.svelte'
   import InputText from '$lib/ui/atoms/InputText.svelte'
+  import InputPhone from '$lib/ui/atoms/InputPhone.svelte'
   import InputTextarea from '$lib/ui/atoms/InputTextarea.svelte'
 
   import Avatar from '$lib/ui/icons/Avatar.svelte'
@@ -25,6 +26,8 @@
       >
         <InputText
           required
+          minlength={3}
+          maxlength={32}
           class="w-full lg:w-1/2 lg:pr-3"
           name="name"
           label={$_('section.contactUsForm.name.label')}
@@ -32,7 +35,7 @@
           icon={Avatar}
         />
 
-        <InputText
+        <InputPhone
           required
           class="w-full lg:w-1/2 lg:pl-3"
           name="phone"
@@ -44,6 +47,8 @@
         <InputTextarea
           required
           rows={6}
+          minlength={3}
+          maxlength={255}
           class="w-full"
           name="issue"
           label={$_('section.contactUsForm.issue.label')}
