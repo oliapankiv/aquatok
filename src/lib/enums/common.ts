@@ -1,3 +1,8 @@
+export enum Adapter {
+  NODE = 'node',
+  STATIC = 'static',
+}
+
 export enum Direction {
   UP = 'up',
   LEFT = 'left',
