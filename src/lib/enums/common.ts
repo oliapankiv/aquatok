@@ -19,3 +19,8 @@ export enum Section {
   CONTACT = 'contact',
   OFFERINGS = 'offerings',
 }
+
+export enum NotificationType {
+  ERROR = 'error',
+  SUCCESS = 'success',
+}
