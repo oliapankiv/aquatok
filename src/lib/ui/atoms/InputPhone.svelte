@@ -9,14 +9,23 @@
     name: string
     label: string
     icon?: Component
+    isValid?: boolean
+    ref?: HTMLInputElement
   }
 
   const MAX_LENGTH = 16
   const COUNTRY_PREFIX = '+38'
 
-  let { value = $bindable(''), class: className, name, label, icon: Icon, ...props }: Props = $props()
-
-  let isValid = $state(true)
+  let {
+    ref = $bindable(),
+    value = $bindable(''),
+    isValid = $bindable(true),
+    class: className,
+    name,
+    label,
+    icon: Icon,
+    ...props
+  }: Props = $props()
 
   $effect(() => {
     if (value.length > MAX_LENGTH) return void (value = value.slice(0, MAX_LENGTH))
@@ -52,10 +61,15 @@
   <input
     {name}
     bind:value
+    bind:this={ref}
     id={name}
     type="text"
+    autocomplete="tel"
     maxlength={MAX_LENGTH}
-    class="w-full rounded-2xl border-2 border-gray-700 bg-gray-900 px-6 py-4 text-lg text-white placeholder-gray-400 transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 focus:outline-none"
+    class={[
+      'w-full rounded-2xl border-2 border-gray-700 bg-gray-900 px-6 py-4 text-lg text-white placeholder-gray-400 transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 focus:outline-none',
+      { 'border-red-400': !isValid },
+    ]}
     onblur={onBlur}
     onfocus={() => (isValid = true)}
     {...props}
