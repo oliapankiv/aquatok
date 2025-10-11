@@ -14,6 +14,8 @@
   import Faq from '$lib/ui/molecules/Faq.svelte'
   import Footer from '$lib/ui/molecules/Footer.svelte'
 
+  import NotificationContainer from '$lib/components/molecules/NotificationContainer.svelte'
+
   const { children } = $props()
 </script>
 
@@ -33,6 +35,8 @@
 
   <script async src={`https://www.googletagmanager.com/gtag/js?id=${env.PUBLIC_GTAG_ID}`}></script>
 </svelte:head>
+
+<NotificationContainer />
 
 <LayoutBackground />
 
