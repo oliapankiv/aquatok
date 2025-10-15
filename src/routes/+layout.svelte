@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
 
-  import { env } from '$env/dynamic/public'
+  import { PUBLIC_BASE_URL, PUBLIC_CAPTCHA, PUBLIC_GTAG_ID } from '$env/static/public'
 
   import '../app.css'
 
@@ -27,13 +27,14 @@
   <meta name="description" property="og:description" content={$_('meta.description')} />
   <meta name="keywords" content={$_('meta.keywords')} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content={`${env.PUBLIC_BASE_URL}/opengraph.png`} />
+  <meta property="og:image" content={`${PUBLIC_BASE_URL}/opengraph.png`} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content={$_('meta.imagealt')} />
 
-  <script async src={`https://www.googletagmanager.com/gtag/js?id=${env.PUBLIC_GTAG_ID}`}></script>
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GTAG_ID}`}></script>
+  <script async src={`https://www.google.com/recaptcha/api.js?render=${PUBLIC_CAPTCHA}`}></script>
 </svelte:head>
 
 <NotificationContainer />

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
   import { enhance } from '$app/forms'
-  import { env } from '$env/dynamic/public'
+  import { PUBLIC_API_URL, PUBLIC_CAPTCHA } from '$env/static/public'
 
   import type { HTMLAttributes } from 'svelte/elements'
 
@@ -35,10 +35,22 @@
 
   const inputs = [name, phone, issue]
 
-  const onSubmit: SubmitFunction = ({ cancel }) => {
+  const generateCaptcha = () =>
+    new Promise<string>((resolve) =>
+      window.grecaptcha.ready(() =>
+        window.grecaptcha
+          .execute(PUBLIC_CAPTCHA, { action: 'contact' })
+          .catch(() => '')
+          .then(resolve),
+      ),
+    )
+
+  const onSubmit: SubmitFunction = async ({ cancel, formData }) => {
     const invalidInputs = inputs.filter(({ value, isValid }) => !value || !isValid).map((input) => (input.isValid = false))
 
     if (invalidInputs.length) return cancel()
+
+    formData.set('captcha', await generateCaptcha())
 
     return ({ result, update }) => {
       if (result.type === 'error') return notify(NotificationType.ERROR, $_('section.contactUsForm.error.unexpected'))
@@ -55,7 +67,7 @@
 
 <section class={['bg-gray-900 lg:bg-gray-900/50 lg:backdrop-blur-xl', className]} {...props}>
   <div class="container">
-    <form use:enhance={onSubmit} method="post" action={`${env.PUBLIC_API_URL}/`} novalidate class="space-y-8">
+    <form use:enhance={onSubmit} method="post" action={`${PUBLIC_API_URL}/`} novalidate class="space-y-8">
       <div
         class="relative flex flex-wrap gap-y-4 rounded-3xl border-gray-800/50 bg-gray-900 py-8 md:px-8 md:py-12 lg:gap-y-8 lg:border lg:bg-gray-900/90 lg:shadow-2xl lg:backdrop-blur-xl"
       >
