@@ -3,8 +3,9 @@
   import { enhance } from '$app/forms'
   import { env } from '$env/dynamic/public'
 
-  import type { SubmitFunction } from '@sveltejs/kit'
   import type { HTMLAttributes } from 'svelte/elements'
+
+  import { notify } from '$lib/composables/notification'
 
   import Action from '$lib/ui/atoms/Action.svelte'
   import InputText from '$lib/ui/atoms/InputText.svelte'
@@ -15,6 +16,10 @@
   import Shield from '$lib/ui/icons/Shield.svelte'
   import Document from '$lib/ui/icons/Document.svelte'
   import Telephone from '$lib/ui/icons/Telephone.svelte'
+
+  import { NotificationType } from '$lib/enums'
+
+  import type { SubmitFunction } from '../../../routes/$types'
 
   type Input<T> = {
     value: string
@@ -35,7 +40,16 @@
 
     if (invalidInputs.length) return cancel()
 
-    return () => {}
+    return ({ result, update }) => {
+      if (result.type === 'error') return notify(NotificationType.ERROR, $_('section.contactUsForm.error.unexpected'))
+
+      if (result.type === 'failure')
+        return notify(NotificationType.ERROR, $_(result.data?.errorMessage || 'section.contactUsForm.error.unexpected'))
+
+      notify(NotificationType.SUCCESS, $_('section.contactUsForm.success'))
+
+      update({ reset: true })
+    }
   }
 </script>
 
@@ -54,7 +68,7 @@
           autocomplete="name"
           label={$_('section.contactUsForm.name.label')}
           placeholder={$_('section.contactUsForm.name.placeholder')}
-          errorMessage={$_('section.contactUsForm.name.error', { values: { n: 2 } })}
+          errorMessage={$_('section.contactUsForm.name.error')}
           icon={Avatar}
           bind:ref={name.ref}
           bind:value={name.value}
