@@ -51,6 +51,9 @@ jobs:
   build-server:
     runs-on: ubuntu-latest
 
+    outputs:
+      digest: ${{ steps.build.outputs.digest }}
+
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
 
@@ -115,6 +118,6 @@ jobs:
       - name: Deploy Server 🚀
         run: |-
           sed -i "s|\${REGISTRY_URL}|${{ secrets.REGISTRY_URL }}|g" compose.yml
-          sed -i "s|${{ vars.SERVICE }}:latest|${{ vars.SERVICE }}@${{ steps.build.outputs.digest }}|g" compose.yml
+          sed -i "s|${{ vars.SERVICE }}:latest|${{ vars.SERVICE }}@${{ needs.build-server.outputs.digest }}|g" compose.yml
 
           curl ${{ secrets.CD_URL }}/${{ vars.SERVICE }} -H 'authorization: ${{ secrets.CD_AUTHORIZATION }}' -F compose=@compose.yml
