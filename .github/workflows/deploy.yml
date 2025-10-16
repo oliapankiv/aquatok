@@ -83,7 +83,7 @@ jobs:
             PUBLIC_API_URL=${{ vars.API_URL }}
             PUBLIC_GTAG_ID=${{ vars.GTAG_ID }}
             PUBLIC_BASE_URL=${{ vars.BASE_URL }}
-            PUBLIC_CAPTCHA=${{ var.PUBLIC_CAPTCHA }}
+            PUBLIC_CAPTCHA=${{ vars.PUBLIC_CAPTCHA }}
 
   deploy:
     needs:
