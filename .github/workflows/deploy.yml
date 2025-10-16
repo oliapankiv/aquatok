@@ -36,6 +36,10 @@ jobs:
           PUBLIC_GTAG_ID: ${{ vars.GTAG_ID }}
           PUBLIC_BASE_URL: ${{ vars.BASE_URL }}
           PUBLIC_CAPTCHA: ${{ vars.PUBLIC_CAPTCHA }}
+          PRIVATE_GROUP_ID:
+          PRIVATE_THREAD_ID:
+          PRIVATE_BOT_KEY:
+          PRIVATE_CAPTCHA:
         run: |
           pnpm build
 
