@@ -1,0 +1,11 @@
+services:
+  aquatok:
+    image: ${REGISTRY_URL}aquatok:latest
+    restart: unless-stopped
+    networks:
+      - nginx
+
+networks:
+  nginx:
+    name: nginx
+    external: true
