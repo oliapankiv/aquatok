@@ -58,7 +58,9 @@ export const actions =
           parse_mode: 'MarkdownV2',
           message_thread_id: +PRIVATE_THREAD_ID,
         })
-      } catch {
+      } catch (error) {
+        console.error(`Failed to send telegram message: ${error}`)
+
         return fail(400, { errorMessage: 'section.contactUsForm.error.submit' })
       }
     },
