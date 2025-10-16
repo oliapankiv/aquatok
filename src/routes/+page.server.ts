@@ -12,8 +12,6 @@ import type { ServerCaptcha } from '$lib/types/captcha'
 
 const IS_ENABLED = (PUBLIC_ADAPTER === Adapter.NODE) as unknown as true
 
-const bot = new Bot(PRIVATE_BOT_KEY)
-
 const makeMessage = (name: string, phone: string, issue: string): string =>
   `🚨 *Запит на контакт:*\nІм'я:\` \`\`${name}\`\nТелефон:\` \`\`${phone}\`\nПроблема:\` \`\`${issue}\``
 
@@ -54,7 +52,7 @@ export const actions =
       if (typeof issue !== 'string' || issue.length < 3) return fail(400, { errorMessage: 'section.contactUsForm.issue.error' })
 
       try {
-        await bot.api.sendMessage(PRIVATE_GROUP_ID, makeMessage(name, phone, issue), {
+        await new Bot(PRIVATE_BOT_KEY).api.sendMessage(PRIVATE_GROUP_ID, makeMessage(name, phone, issue), {
           parse_mode: 'MarkdownV2',
           message_thread_id: +PRIVATE_THREAD_ID,
         })
