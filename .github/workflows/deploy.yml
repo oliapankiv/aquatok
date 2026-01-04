@@ -92,6 +92,16 @@ jobs:
             PUBLIC_BASE_URL=${{ vars.BASE_URL }}
             PUBLIC_CAPTCHA=${{ vars.PUBLIC_CAPTCHA }}
 
+      - name: Save Image Digest
+        run: |
+          echo "${{ steps.build.outputs.digest }}" > image-digest.txt
+
+      - name: Upload Digest Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-digest
+          path: image-digest.txt
+
   deploy:
     needs:
       - build-client
@@ -111,6 +121,17 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
 
+      - name: Download Digest Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: image-digest
+
+      - name: Read Digest
+        id: digest
+        run: |
+          DIGEST=$(cat image-digest.txt)
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+
       - name: Deploy Client 🚀
         id: deployment
         uses: actions/deploy-pages@v4
@@ -118,6 +139,6 @@ jobs:
       - name: Deploy Server 🚀
         run: |-
           sed -i "s|\${REGISTRY_URL}|${{ secrets.REGISTRY_URL }}|g" compose.yml
-          sed -i "s|${{ vars.SERVICE }}:latest|${{ vars.SERVICE }}@${{ needs.build-server.outputs.digest }}|g" compose.yml
+          sed -i "s|${{ vars.SERVICE }}:latest|${{ vars.SERVICE }}@${{ steps.digest.outputs.digest }}|g" compose.yml
 
           curl ${{ secrets.CD_URL }}/${{ vars.SERVICE }} -H 'authorization: ${{ secrets.CD_AUTHORIZATION }}' -F compose=@compose.yml
