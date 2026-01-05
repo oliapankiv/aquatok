@@ -138,7 +138,7 @@ jobs:
 
       - name: Deploy Server 🚀
         run: |-
-          sed -i "s|\${REGISTRY_URL}|${{ secrets.REGISTRY_URL }}|g" compose.yml
+          sed -i "s|\${REGISTRY_URL}|${{ secrets.REGISTRY_URL }}/|g" compose.yml
           sed -i "s|${{ vars.SERVICE }}:latest|${{ vars.SERVICE }}@${{ steps.digest.outputs.digest }}|g" compose.yml
 
           curl ${{ secrets.CD_URL }}/${{ vars.SERVICE }} -H 'authorization: ${{ secrets.CD_AUTHORIZATION }}' -F compose=@compose.yml
