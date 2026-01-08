@@ -24,6 +24,7 @@
   }
 
   const links: Link[] = [
+    { href: '/portfolio', label: $_('generic.portfolio') },
     { href: '/vacancies', label: $_('generic.vacancies') },
     { href: Section.OFFERINGS, label: $_('generic.offerings') },
     { href: Section.CONTACT, label: $_('generic.contact') },
@@ -55,7 +56,7 @@
   <Spaced {axis}>
     <a
       {...applyLink(href)}
-      class="inline-flex h-full w-full items-center px-4 py-3 capitalize bg-blend-multiply hover:bg-white/[2.5%]"
+      class="block h-full w-full items-center px-4 py-3 bg-blend-multiply first-letter:uppercase hover:bg-white/[2.5%]"
     >
       {label}
     </a>
