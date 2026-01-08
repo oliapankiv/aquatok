@@ -29,6 +29,8 @@
 
   const { class: className, ...props }: HTMLAttributes<HTMLElement> = $props()
 
+  let busy = $state<boolean>(false)
+
   let name = $state<Input<HTMLInputElement>>({ value: '', isValid: true, ref: undefined })
   let phone = $state<Input<HTMLInputElement>>({ value: '', isValid: true, ref: undefined })
   let issue = $state<Input<HTMLTextAreaElement>>({ value: '', isValid: true, ref: undefined })
@@ -48,11 +50,15 @@
   const onSubmit: SubmitFunction = async ({ cancel, formData }) => {
     const invalidInputs = inputs.filter(({ value, isValid }) => !value || !isValid).map((input) => (input.isValid = false))
 
-    if (invalidInputs.length) return cancel()
+    if (busy || invalidInputs.length) return cancel()
+
+    busy = true
 
     formData.set('captcha', await generateCaptcha())
 
     return ({ result, update }) => {
+      busy = false
+
       if (result.type === 'error') return notify(NotificationType.ERROR, $_('section.contactUsForm.error.unexpected'))
 
       if (result.type === 'failure')
@@ -115,7 +121,7 @@
           bind:isValid={issue.isValid}
         />
 
-        <Action class="mt-3 w-full lg:mt-1" type="submit">{$_('section.contactUsForm.submit')}</Action>
+        <Action class="mt-3 w-full lg:mt-1" disabled={busy} type="submit">{$_('section.contactUsForm.submit')}</Action>
 
         <p class="flex w-full items-center justify-center space-x-2 text-center text-sm text-gray-400 md:-mt-2">
           <Shield class="inline-block h-4 w-4 text-green-500" />
