@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { browser } from '$app/environment'
+
   import { onMount } from 'svelte'
+  import { afterNavigate } from '$app/navigation'
   import { _ } from 'svelte-i18n'
 
   import { PUBLIC_BASE_URL, PUBLIC_CAPTCHA, PUBLIC_GTAG_ID } from '$env/static/public'
@@ -22,6 +25,8 @@
   let mounted = $state<boolean>(false)
 
   onMount(() => (mounted = true))
+
+  afterNavigate(() => browser && Object.assign(globalThis, { dataLayer: ['js', new Date(), 'config', PUBLIC_GTAG_ID] }))
 </script>
 
 <svelte:head>
